@@ -8,7 +8,7 @@
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:id="@+id/score_spinner"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
@@ -21,14 +21,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Comentaris (140 caràcters)"
         android:id="@+id/textView"
-        android:layout_below="@+id/spinner"
+        android:layout_below="@+id/score_spinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     s<EditText
         android:layout_width="wrap_content"
         android:layout_height="134dp"
-        android:id="@+id/editText"
+        android:id="@+id/comment_edit_text"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -40,8 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enviar"
-        android:id="@+id/button"
+        android:id="@+id/send_review_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="40dp"
+        android:onClick="sendReview"/>
 </RelativeLayout>

@@ -9,71 +9,55 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-<<<<<<< HEAD
 
 import com.google.gson.Gson;
 
-=======
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import java.util.*;
 import android.text.TextWatcher;
 import android.widget.Button;
 import android.view.View;
 import android.widget.Toast;
->>>>>>> origin/master
 
 public class MainActivity extends ActionBarActivity {
 
     Review review;
     private final String TAG = getClass().getSimpleName();
 
+    // layout views
+    Spinner score_spinner;
+    EditText comment_edit_text;
+    Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
+        score_spinner = (Spinner) findViewById(R.id.score_spinner);
+        comment_edit_text = (EditText) findViewById(R.id.comment_edit_text);
+        button = (Button) findViewById(R.id.send_review_button);
+
         review = new Review();
         // location listener, so each time the GPS senses a new location, this callback function will be called from the android system
         LocationManager mlocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         LocationListener mlocListener = new MyLocationListener(review);
         mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
-=======
-        final Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                final TextView comment_content =  (TextView) findViewById(R.id.editText);
-
-                String content = comment_content.getText().toString();
-
-                ArrayList<String> hastag = new ArrayList<String>();
-                if (content != null) { //there are characters inside the textview
-                    find_hastags(content, hastag);
-                }
-
-                Iterator<String> it = hastag.iterator();
-
-                String s = ""+ hastag.size();
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
-                while( it.hasNext() ){
-                    //Toast.makeText(getApplicationContext(), it.next(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
->>>>>>> origin/master
     }
 
-    private void find_hastags(String content, ArrayList<String> hastag)
+    private void find_hastags(String content, ArrayList<String> hashtag)
     {
         for (int i = 0; i < content.length(); ++i){
             if (content.charAt(i) == '#') {
                 ++i; //the position i has got '#'
                 String aux="";
-                while( letra_numero(content.charAt(i)) && i < content.length()) {
+                while((i < content.length())&&(letra_numero(content.charAt(i)))) {
                     aux += content.charAt(i);
                     ++i;
                 }
-                hastag.add(aux);
+                hashtag.add(aux);
             }
         }
         Toast.makeText(getApplicationContext(), "surto", Toast.LENGTH_SHORT).show();
@@ -101,18 +85,32 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            sendReview();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public void sendReview() {
+    public void sendReview(View view) {
+
+        // getting the user's score
+
+        // getting the user's comment
+        Log.d(TAG, "Displaying the content");
+        String comment = comment_edit_text.getText().toString(); // the user's comment
+        review.setComment(comment);
+
+        // getting the user's used hashtags
+        Log.d(TAG, "Displaying the hashtags");
+        ArrayList<String> hashtags = new ArrayList<String>();
+        if (comment != null) find_hastags(comment, hashtags);
+        review.setHashtags(hashtags);
+
+        Log.d(TAG, "Making the json");
         Gson gson = new Gson();
         String json = gson.toJson(review);
 
-        Log.d(TAG, json);
+        Log.d(TAG, "This is the json: "+json);
 
         // send it to database
     }

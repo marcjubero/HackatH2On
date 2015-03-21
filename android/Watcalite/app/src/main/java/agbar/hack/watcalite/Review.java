@@ -29,6 +29,18 @@ public class Review {
         latitude = -1.0;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setHashtags(ArrayList<String> hashtags) {
+        this.hashtags = hashtags;
+    }
+
     public void setLongtitude(Double longtitude) {
         this.longtitude = longtitude;
     }
