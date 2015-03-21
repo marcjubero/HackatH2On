@@ -40,12 +40,14 @@ module.exports = {
 		con.end();
 	},
 
-	getPointsInRadius: function(point,radius,onSuccess) {
+	getPointsInRadius: function(point,radius,days,onSuccess) {
 		var con = db.createConnection();
 
         async.parallel([
             function(callback) {
-                var query = "SELECT rate,comment FROM point WHERE SQRT(POWER(("+point.lat+"-lat),2)+POWER(("+point.lon+"-lon),2)) <= " + radius + " ORDER BY date DESC LIMIT 20";
+                var query = "SELECT rate,comment, DATE_FORMAT(date,'%d-%m-%Y') AS date FROM point " +
+                    "WHERE SQRT(POWER(("+point.lat+"-lat),2)+POWER(("+point.lon+"-lon),2)) <= " + radius + "" +
+                    "AND date(DATE_SUB(sysdate(),INTERVAL " + days + " DAY)) <= date(date) ORDER BY date DESC LIMIT 20";
                 console.log(query);
                 con.query(query, function(err,rows,fields) {
                     if (err) console.log("err: " + err);
@@ -53,7 +55,9 @@ module.exports = {
                 });
 
             }, function(callback) {
-                var query = "SELECT AVG(rate), AVG(color) FROM point WHERE SQRT(POWER(("+point.lat+"-lat),2)+POWER(("+point.lon+"-lon),2)) <= " + radius + " ORDER BY date DESC"
+                var query = "SELECT AVG(rate), AVG(color) FROM point " +
+                    "WHERE SQRT(POWER(("+point.lat+"-lat),2)+POWER(("+point.lon+"-lon),2)) <= " + radius + "" +
+                    "AND date(DATE_SUB(sysdate(),INTERVAL " + days + " DAY)) <= date(date) ORDER BY date DESC";
                 console.log(query);
                 con.query(query, function(err,rows,fields) {
                     if (err) console.log("err: " + err);

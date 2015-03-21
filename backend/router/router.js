@@ -57,9 +57,10 @@ module.exports = function(app) {
                 "lat": req.body.lat,
                 "lon": req.body.lon
             },
-			radius = req.body.radius;
+			radius = req.body.radius,
+            days = req.body.days;
 
-		dbHandler.getPointsInRadius(point,radius,function(err,result) {
+		dbHandler.getPointsInRadius(point,radius,days,function(err,result) {
 			if(err) console.log("err -> " + err);
 			else {
 				console.log("getPerPoint");
