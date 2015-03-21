@@ -1,6 +1,7 @@
 package agbar.hack.watcalite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -85,6 +86,8 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,MapsActivity.class);
+            startActivity(intent);
             return true;
         }
 

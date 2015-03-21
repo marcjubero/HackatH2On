@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Watcalite</string>
 
+    <string name="app_name">Watcalite</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
@@ -11,5 +12,7 @@
         <item>4 Estrella</item>
         <item>5 Estrella</item>
     </string-array>
+
+    <string name="title_activity_maps">Map</string>
 
 </resources>
