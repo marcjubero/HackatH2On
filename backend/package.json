@@ -1,0 +1,8 @@
+{
+    "name": "WatCalite",
+    "main": "app.js",
+    "dependencies": {
+        "express": "latest",
+        "body-parser": "latest"
+    }
+}

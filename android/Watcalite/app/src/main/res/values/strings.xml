@@ -3,4 +3,13 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="Score">
+        <item>1 Estrella</item>
+        <item>2 Estrella</item>
+        <item>3 Estrella</item>
+        <item>4 Estrella</item>
+        <item>5 Estrella</item>
+    </string-array>
+
 </resources>

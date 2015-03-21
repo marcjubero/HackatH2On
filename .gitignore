@@ -1,0 +1,12 @@
+#file system files
+.DS_Store
+
+#Android Studio
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/build
+
+#NodeJS
+/node_modules
