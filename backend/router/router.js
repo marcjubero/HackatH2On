@@ -12,6 +12,7 @@ var dbHandler = require('../handlers/dbHandler');
 
 
 module.exports = function(app) {
+
 	app.get('/', function(req,res) {
 		res.send({"message": "HelloWorld!"})
 	});
@@ -47,6 +48,23 @@ module.exports = function(app) {
 				console.log("Result -> ");
 				console.log(result);
 				res.json(result);
+			}
+		});
+	});
+
+	app.post("/getPointsInRadius/", function(req,res) {
+		var point = {
+                "lat": req.body.lat,
+                "lon": req.body.lon
+            },
+			radius = req.body.radius;
+
+		dbHandler.getPointsInRadius(point,radius,function(err,result) {
+			if(err) console.log("err -> " + err);
+			else {
+				console.log("getPerPoint");
+				//console.log(result);
+				res.send(result);
 			}
 		});
 	});

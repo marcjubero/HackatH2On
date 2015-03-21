@@ -9,4 +9,6 @@
 /build
 
 #NodeJS
-/node_modules
+
+backend/.idea
+backend/node_modules
