@@ -22,7 +22,7 @@ module.exports = function(app) {
 
 	app.post("/addPoint", function(req,res) {
 		var point = {
-				"score" 	: req.body.score,
+				"rate" 		: req.body.rate,
 				"comment" 	: req.body.comment,
 				"date" 		: req.body.date,
 				"latitude" 	: req.body.latitude,
@@ -30,7 +30,24 @@ module.exports = function(app) {
 				"hastags" 	: req.body.hashtags
 		};
 
-		dbHandler.savePoint(point,function(err,res) {});
+		dbHandler.savePoint(point, function(err,result) {
+			if(err) console.log("err" + err);
+			else {
+				console.log("Result -> ");
+				console.log(result);
+				res.json(result);
+			}
+		});
+	});
 
-
+	app.get("/getPoints", function(req,res) {
+		dbHandler.getPoints(function(err,result) {
+			if(err) console.log("err" + err);
+			else {
+				console.log("Result -> ");
+				console.log(result);
+				res.json(result);
+			}
+		});
+	});
 }
