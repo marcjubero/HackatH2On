@@ -9,7 +9,9 @@ import android.util.Log;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -82,17 +84,32 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
         //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
         // marker at current location
+        /*
         myMarker = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(latitude, longitude))
                                         .title("Tú")
                                         .snippet("Puntuación media: ")); //TODO: score from sv
         myMarker.showInfoWindow();
 
+
         // centers camera at you
         LatLng latLng = new LatLng(latitude, longitude);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
         mMap.animateCamera(cameraUpdate);
         //locationManager.removeUpdates(this); wot?
+        */
+
+        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            public void onCameraChange(CameraPosition arg0) {
+                Projection p = mMap.getProjection();
+                p.getVisibleRegion().latLngBounds.getCenter(); // center point of the screen
+                /*
+                -------------------------------------------------------------------------------
+                          CONSULTAR AL SERVIDOR LAS DADES AMB EL CENTRE DE LA PANTALLA
+                -------------------------------------------------------------------------------
+                 */
+            }
+        });
     }
 
     @Override
