@@ -26,6 +26,7 @@ import android.widget.Toast;
 public class MainActivity extends ActionBarActivity {
 
     Review review;
+    LongLat longlat;
     private final String TAG = getClass().getSimpleName();
 
     // layout views
@@ -43,9 +44,10 @@ public class MainActivity extends ActionBarActivity {
         button = (Button) findViewById(R.id.send_review_button);
 
         review = new Review();
+        longlat = new LongLat();
         // location listener, so each time the GPS senses a new location, this callback function will be called from the android system
         LocationManager mlocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        LocationListener mlocListener = new MyLocationListener(review);
+        LocationListener mlocListener = new MyLocationListener(review, longlat);
         mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 
 
@@ -90,6 +92,14 @@ public class MainActivity extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this,MapsActivity.class);
+
+            Double latitude = longlat.getLatitude();
+            Log.d(TAG, String.valueOf(latitude));
+            Double longitude = longlat.getLongitude();
+            Log.d(TAG, String.valueOf(longitude));
+            intent.putExtra("latitude",latitude);
+            intent.putExtra("longitude",longitude);
+
             startActivity(intent);
             return true;
         }

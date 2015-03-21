@@ -37,6 +37,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="agbar.hack.watcalite.MainActivity" />
         </activity>
+        <activity android:name=".DetailedInfo"
+            android:parentActivityName=".MapsActivity" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

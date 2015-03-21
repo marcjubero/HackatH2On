@@ -1,8 +1,10 @@
 package agbar.hack.watcalite;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -16,14 +18,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarkerClickListener {
 
+    private final String TAG = getClass().getSimpleName();
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private Double latitude;
+    private Double longitude;
+    private Marker myMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Intent intent = getIntent();
+        latitude = intent.getDoubleExtra("latitude",0);
+        Log.d(TAG, String.valueOf(latitude));
+        longitude = intent.getDoubleExtra("longitude",0);
+        Log.d(TAG, String.valueOf(longitude));
     }
 
     @Override
@@ -53,6 +64,7 @@ public class MapsActivity extends FragmentActivity {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
+            mMap.setOnMarkerClickListener(this);
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
@@ -69,9 +81,30 @@ public class MapsActivity extends FragmentActivity {
     private void setUpMap() {
         //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
 
-        Marker marker = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(37.7750, 122.4183))
-                .title("San Francisco")
-                .snippet("Population: 776733"));
+        // marker at current location
+        myMarker = mMap.addMarker(new MarkerOptions()
+                                        .position(new LatLng(latitude, longitude))
+                                        .title("Tú")
+                                        .snippet("Puntuación media: ")); //TODO: score from sv
+        myMarker.showInfoWindow();
+
+        // centers camera at you
+        LatLng latLng = new LatLng(latitude, longitude);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
+        mMap.animateCamera(cameraUpdate);
+        //locationManager.removeUpdates(this); wot?
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Log.d(TAG, "Clicked a marker");
+        if(marker.equals(myMarker)) {
+            Log.d(TAG, "Clicked THE marker");
+            Intent intent = new Intent(this, DetailedInfo.class);
+            intent.putExtra("latitude",latitude);
+            intent.putExtra("longitude",longitude);
+            startActivity(intent);
+        }
+        return false;
     }
 }
