@@ -14,14 +14,8 @@ public class Review {
     private ArrayList<String> hashtags;
     private Double longtitude;
     private Double latitude;
-    private String date;
 
     public Review() {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-        String date = sdf.format(calendar.getTime());
-        calendar.getTime();
-
         score = -1;
         comment = "none";
         hashtags = new ArrayList<String>();

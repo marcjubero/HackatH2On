@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.gson.Gson;
 
 import android.widget.EditText;
@@ -46,6 +47,8 @@ public class MainActivity extends ActionBarActivity {
         LocationManager mlocManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         LocationListener mlocListener = new MyLocationListener(review);
         mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+
+
     }
 
     private void find_hastags(String content, ArrayList<String> hashtag)
@@ -115,8 +118,9 @@ public class MainActivity extends ActionBarActivity {
 
         Log.d(TAG, "This is the json: "+json);
 
-        // send it to database
+        // send it to database through a asyncTask
     }
+
 }
 
 

@@ -5,12 +5,18 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by Daniil on 21/03/2015.
  */
 public class MyLocationListener implements LocationListener {
 
     private final String TAG = getClass().getSimpleName();
+
     Review review;
 
     public MyLocationListener(Review review){
@@ -31,6 +37,13 @@ public class MyLocationListener implements LocationListener {
         // update Review
         review.setLatitude(latitude);
         review.setLongtitude(longitude);
+
+        /*if(map!=null) {
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
+            map.animateCamera(cameraUpdate);
+            //locationManager.removeUpdates(this); wot?
+        }*/
     }
 
     /**
