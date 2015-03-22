@@ -24,16 +24,8 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ImageView opinar = (ImageView) findViewById(R.id.opinar_imageView);
         ImageView valoraciones = (ImageView) findViewById(R.id.valoraciones_imageView);
-
-        /*try{
-            opinar.setImageDrawable(getAssetImage("opinar"));
-            valoraciones.setImageDrawable(getAssetImage("valoraciones"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public void goToReview(View view) {
@@ -45,11 +37,4 @@ public class MainActivity extends Activity{
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
-
-    /*private Drawable getAssetImage(String filename) throws IOException {
-        AssetManager assets = this.getResources().getAssets();
-        InputStream buffer = new BufferedInputStream((assets.open("drawable/" + filename + ".jgg")));
-        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
-        return new BitmapDrawable(this.getResources(), bitmap);
-    }*/
 }
