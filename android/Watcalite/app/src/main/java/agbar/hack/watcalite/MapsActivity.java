@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.graphics.drawable.Drawable;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,6 +29,53 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
     private Double latitude;
     private Double longitude;
     private Marker myMarker;
+
+    public void empty_water()
+    {
+        ImageView imgView=(ImageView) findViewById(R.id.imageView);
+        Drawable  drawable  = getResources().getDrawable(R.drawable.gota0);
+        imgView.setImageDrawable(drawable);
+    }
+
+    public void image_water_score (int x) {
+        if (x <= 1.3) {
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota1);
+            imgView.setImageDrawable(drawable);
+        } else if (x > 1.3 && x <= 1.7) {
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota2);
+            imgView.setImageDrawable(drawable);
+        } else if (x > 1.7 && x <= 2.3) {
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota3);
+            imgView.setImageDrawable(drawable);
+        } else if (x > 2.3 && x <= 2.7) {
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota4);
+            imgView.setImageDrawable(drawable);
+        } else if (x > 2.7 && x <= 3.3) {
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota5);
+            imgView.setImageDrawable(drawable);
+        } else if (x > 3.3 && x <= 3.7) {
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota6);
+            imgView.setImageDrawable(drawable);
+        } else if (x > 3.7 && x <= 4.3) {
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota7);
+            imgView.setImageDrawable(drawable);
+        } else if (x > 4.3 && x <= 4.7) {
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota8);
+            imgView.setImageDrawable(drawable);
+        } else { // 5 water drops
+            ImageView imgView = (ImageView) findViewById(R.id.imageView);
+            Drawable drawable = getResources().getDrawable(R.drawable.gota9);
+            imgView.setImageDrawable(drawable);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +151,7 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMarker
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             public void onCameraChange(CameraPosition arg0) {
                 Projection p = mMap.getProjection();
+                empty_water();
                 p.getVisibleRegion().latLngBounds.getCenter(); // center point of the screen
                 /*
                 -------------------------------------------------------------------------------
