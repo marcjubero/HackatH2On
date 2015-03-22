@@ -52,7 +52,7 @@ module.exports = function(app) {
 		});
 	});
 
-	app.post("/getPointsInRadius/", function(req,res) {
+	app.post("/getPointsInRadius", function(req,res) {
 		var point = {
                 "lat": req.body.lat,
                 "lon": req.body.lon
