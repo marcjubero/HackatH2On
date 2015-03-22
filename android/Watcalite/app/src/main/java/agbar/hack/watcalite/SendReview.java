@@ -19,8 +19,6 @@ import java.util.*;
 
 import android.widget.Button;
 import android.view.View;
-import android.widget.Toast;
-
 public class SendReview extends ActionBarActivity {
 
     Review review;
@@ -37,7 +35,7 @@ public class SendReview extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendreview);
 
-        score_spinner = (Spinner) findViewById(R.id.score_spinner);
+
         comment_edit_text = (EditText) findViewById(R.id.comment_edit_text);
         button = (Button) findViewById(R.id.send_review_button);
 
@@ -64,8 +62,6 @@ public class SendReview extends ActionBarActivity {
                 hashtag.add(aux);
             }
         }
-        Toast.makeText(getApplicationContext(), "surto", Toast.LENGTH_SHORT).show();
-
     }
 
     private boolean letra_numero(char c)
